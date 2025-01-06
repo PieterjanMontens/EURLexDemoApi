@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "eurlex_api"
+version = "0.1.0"
+description = ""
+authors = ["Pieterjan Montens <pieterjan@montens.net>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+click = "^8.1.8"
+fastapi = "^0.115.6"
+pytz = "^2024.2"
+pyyaml = "^6.0.2"
+httpx = "^0.28.1"
+toml = "^0.10.2"
+uvicorn = "^0.34.0"
+
+
+[tool.poetry.group.dev.dependencies]
+isort = "^5.13.2"
+flake8 = "^7.1.1"
+pylint = "^3.3.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+api = "eurlex_api.main:main"
