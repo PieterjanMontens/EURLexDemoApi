@@ -42,9 +42,5 @@ A recent [python](https://www.python.org/downloads/) version (>=3.11) will also 
 
 These local URI's provide interaction and documentation for the endpoint
 
-* http://127.0.0.1:5000 for root
-* http://127.0.0.1:5000/docs for OpenAPI documentation
-
-For testing the HTML template (which can be run without a database, see below), a specific endpoint is provided:
-
-* http://127.0.0.1:5000/test
+* http://127.0.0.1:5011 for root
+* http://127.0.0.1:5011/docs for OpenAPI documentation

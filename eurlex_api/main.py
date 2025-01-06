@@ -15,6 +15,8 @@ import eurlex_api.lib_misc as lm
 from .lib_cfg import config
 from .utilities import logger
 
+from .routers import search
+
 # ################################################### SETUP AND ARGUMENT PARSING
 # ##############################################################################
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -30,6 +32,7 @@ tags_metadata = [
 ]
 
 app = FastAPI(root_path=config.key('proxy_prefix'), openapi_tags=tags_metadata)
+app.include_router(search.router)
 
 favicon_path = './static/favicon.ico'
 
@@ -78,10 +81,11 @@ def main():
             reload=True,
             **config.key('server')
         )
-    uvicorn.run(
-        app,
-        **config.key('server')
-    )
+    else:
+        uvicorn.run(
+            app,
+            **config.key('server')
+        )
 
 
 if __name__ == "__main__":

@@ -25,7 +25,7 @@ class ConfigClass:
         'soap_api': {
             'user_name': os.getenv('SOAP_USER', ''),
             'user_token': os.getenv('SOAP_TOKEN', ''),
-            'endpoint': os.getenv('SOAP_ENDPOINT', ''),
+            'endpoint': os.getenv('SOAP_ENDPOINT', 'https://eur-lex.europa.eu/EURLexWebService?WSDL'),
         },
         'server': {
             'host': os.getenv('HOST', '127.0.0.1'),
