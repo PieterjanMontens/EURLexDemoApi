@@ -15,7 +15,17 @@ import eurlex_api.lib_misc as lm
 from .lib_cfg import config
 from .utilities import logger
 
-from .routers import search
+from .routers import search, navlist, notice
+
+description = """
+The EUR-Lex DEMO API is a testing ground made to explore, understand
+ and test up-to-date and state-of-thearet webservice API features and
+ methods of content delivery.
+
+- Execute search operations wich reproduce and improve the legacy webservice
+- Navigate through document collections
+- Configuration of output format
+"""
 
 # ################################################### SETUP AND ARGUMENT PARSING
 # ##############################################################################
@@ -27,12 +37,27 @@ START_TIME = datetime.now(pytz.utc)
 tags_metadata = [
     {
         "name": "search",
-        "description": "Search operations",
+        "description": "Query the EUR-Lex search index",
+    },
+    {
+        "name": "list",
+        "description": "List contents from various collections or content groups"
+    },
+    {
+        "name": "notice",
+        "description": "Resource metadata notice"
     }
 ]
 
-app = FastAPI(root_path=config.key('proxy_prefix'), openapi_tags=tags_metadata)
+app = FastAPI(
+    title="EUR-Lex REST API",
+    description=description,
+    root_path=config.key('proxy_prefix'),
+    openapi_tags=tags_metadata
+)
 app.include_router(search.router)
+app.include_router(navlist.router)
+app.include_router(notice.router)
 
 favicon_path = './static/favicon.ico'
 
@@ -41,7 +66,7 @@ favicon_path = './static/favicon.ico'
 # #############################################################################
 
 
-@app.get("/")
+@app.get("/", include_in_schema=False)
 def root():
     return lm.status_get(START_TIME, VERSION)
 
